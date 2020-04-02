@@ -296,6 +296,9 @@ local function main(arg)
 
    if (do_country_list) then
       local rc,dataset = l.read_covid_19_data_csv(data_file)
+      if (rc ~= true) then
+	 error("Read covid error: "..dataset)
+      end
       local country_list = l.get_country_list(dataset)
       local country, count
       for country,count in tablex.sort(country_list) do
@@ -324,6 +327,9 @@ local function main(arg)
    -- read in the raw data set
    --
    local rc,dataset = l.read_covid_19_data_csv(data_file)
+   if (rc ~= true) then
+      error("Read covid error: "..dataset)
+   end
    --
    -- generate the day-by-day data for the country
    --

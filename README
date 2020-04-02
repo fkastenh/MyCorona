@@ -77,7 +77,10 @@ library.lua
    is the higher level how to use:
    
        -- read in the entire dataset
-       data_set = library.read_covid_19_data_csv(filename)
+       rc,data_set = library.read_covid_19_data_csv(filename)
+       if (rc ~= true) then
+          error("Read covid error: "..data_set)
+       end	  
 
        -- Extract desired country's data
        country_data_set = library.get_country_data(data_set, country_name)
