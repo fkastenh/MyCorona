@@ -1,0 +1,102 @@
+Some simple lua programs to download, process, and generate graphs and
+a paper for tracking the Corona Virus outbreak and making some
+simplistic predictions.
+
+========================================================================
+
+This distribution contains
+ - My Lua scripts and libraries to read and graph the data,
+ - A copy of the Lua 5.3.5 distribution,
+ - A copy of the Lua file system distribution,
+ - A copy of Lua's penlight library distribution.
+ - A copy of Lua's Date library distribution.
+ - A copy of the gnuplot 5.2.8 distribution.
+
+These are all included in an attempt to make this a single, get
+everything you need, package. If you build and install this
+distribution, you'll get all those tools.
+
+However, the tools are placed in a sandbox, so they will/should not
+overwrite any version of these things that are already installed on
+your system.
+
+I recommend that you make a temporary/working directory and untar
+MyCorona.tar in that directory and then do the build.  You will end up
+with:
+  working_directory
+    |
+    +-> MyCorona  -- contains the distribution
+    +-> bin       -- this and following directories all
+    +-> include   -- contain results of the build.
+    +-> lib
+    +-> libexec
+    +-> man
+    +-> share
+
+========================================================================
+
+The DIST directory contains the distributions of Lua, Penlight, and
+Lua File System used for these programs.  If running the MyCorona
+scripts using Lua/etc already installed on your system gives you
+unexpected results, I suggest building and installing these
+distributions and then using them.
+
+NOTE WELL: I HAVE DONE ALL OF THIS ON A MAC AND THE BUILD/INSTALL
+PROCESS WORKS ON THAT.  IF YOU ARE ON SOMETHING ELSE, YOU MAY NEED TO
+MODIFY THE PROCESS.  THE PROCESS USES SLIGHTLY MODIFIED FORMS OF THE
+ORIGINAL MAKEFILES, SO IT PROBABLY WONT BE HARD. MOST LIKELY YOU WILL
+NEED TO PLUMB SOME SPECIAL VARIABLE THROUGH THE MAKEFILES.
+
+To build and install:  
+  1) cd dist
+  2) make
+  3) make install
+  4) cd ..
+  5) ./bin/lua death-rate.lua (or whatever)
+
+The distributions have been slightly modified so that they are
+installed in ./bin, ./lib, and so on.  This way, these versions of
+Lua, etc, will not interfere with whatever might be installed on your
+machine. 
+
+======================================================================
+The scripts and libaries are
+active-cases.lua
+case-daily.lua
+computed-cases.lua
+death-daily.lua
+death-rate.lua
+death-vs-recovered-rate.lua
+growth-percent.lua
+
+fkgetopt.lua
+   This is a library to do command line parsing.
+library.lua
+   This is a library of common functions/etc for the scripts.
+   Functions are moderately well documented. What's missing
+   is the higher level how to use:
+   
+       -- read in the entire dataset
+       data_set = library.read_covid_19_data_csv(filename)
+
+       -- Extract desired country's data
+       country_data_set = library.get_country_data(data_set, country_name)
+
+       -- Print the desired country's data.
+       for date, record in tablex.sort(country_data) do
+         print("Date: "..date.."  has "
+               ..tostring(record.confirmed).." confirmed cases, "
+               ..tostring(record.deaths).." deaths, and "
+               ..tostring(record.recovered).." recovered cases.")
+      end
+
+test-days.lua
+test.lua
+   These are two test scripts I used in getting the libraries
+   working properly.
+======================================================================
+
+The dataset that is in use is in
+    novel-corona-virus-2019-dataset
+from https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset/data
+Last downloaded on 1 April 2020, 10:02 am

@@ -1,0 +1,9 @@
+
+all:
+	./configure --without-latex --prefix=$(LUA_ROOT)
+	make
+	
+install: dummy
+	make install
+
+dummy:
