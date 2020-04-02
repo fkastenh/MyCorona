@@ -7,7 +7,6 @@ dist/lua-5.3.5/src/luac
 *.la
 *.lo
 *.Plo
-*csv
 dist/gnuplot-5.2.8/Makefile
 dist/gnuplot-5.2.8/config.h
 dist/gnuplot-5.2.8/config.log
